@@ -1,0 +1,36 @@
+{
+  "name": "wi-proxy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hoangthanh751996/wi-proxy.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hoangthanh751996/wi-proxy/issues"
+  },
+  "homepage": "https://github.com/hoangthanh751996/wi-proxy#readme",
+  "dependencies": {
+    "bluebird": "^3.5.5",
+    "body-parse": "^0.1.0",
+    "config": "^3.1.0",
+    "cookie-parser": "^1.4.4",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-validator": "^5.3.1",
+    "glob": "^7.1.4",
+    "kue": "^0.11.6",
+    "mongoose": "^5.5.14",
+    "morgan": "^1.9.1",
+    "mqtt": "^3.0.0",
+    "redis": "^2.8.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4"
+  }
+}

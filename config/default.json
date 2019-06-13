@@ -1,0 +1,42 @@
+{
+    "server": {
+        "port": "3030",
+        "base_url": "http://localhost:3030"
+    },
+    "locals": {
+        "wi_auth": "http://localhost:2999",
+        "wi_backend": "http://localhost:3000"
+    },
+    "clouds": {
+        "wi_auth": "http://admin.dev.i2g.cloud",
+        "wi_backend": "http://dev.i2g.cloud"
+    },
+    "redis": {
+        "host": "127.0.0.1",
+        "port": 6379,
+        "password": ""
+    },
+    "mongo": {
+        "uri": "mongodb://127.0.0.1:27017/wi-proxy"
+    },
+    "private_hosts": {
+        "wi_sync": "http://localhost:3031"
+    },
+    "path_download": "./download",
+    "CONCURRENT_TASKS_EXECUTE": 2,
+    "RETRY_TIME": 2,
+    "mysql": {
+        "dialect": "mysql",
+        "host": "172.17.0.1",
+        "port": 3306,
+        "user": "i2g",
+        "password": "qwertyuiop",
+        "logging": false,
+        "storage": "/tmp/wi_backend.sqlite",
+        "dbName": "wi_backend",
+        "prefix": "wi1004_"
+    },
+    "mqtt": {
+        "host": "wss://mqtt-broker.i2g.cloud"
+    }
+}
