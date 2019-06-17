@@ -24,6 +24,7 @@ module.exports = async () => {
 
             // load jobs
             require("./task/import-db");
+            require("./task/download-curve");
             // load routes middleware
             app.use("/", require("./api"));
 

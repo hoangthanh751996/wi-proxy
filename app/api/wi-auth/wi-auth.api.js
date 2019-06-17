@@ -9,28 +9,33 @@ const mqttService = require("../../services/mqtt/mqtt");
 api.post("/wi-auth/login", async (req, res) => {
     try {
         const subRoute = `/${req.url.split("/")[2]}` || "";
-        const checkUser = await userActions.findOne({username: req.body.username});
-        if (checkUser) {
-            if (checkUser.is_syncing === false) {
-                const response = await wiAuthServices.loginForward(subRoute, req.body);
-                res.json(response);
+        const response = await wiAuthServices.loginForward(subRoute, req.body);
+        if (response.code === 200) {
+            const checkUser = await userActions.findOne({username: req.body.username});
+            if (checkUser) {
+                if (checkUser.is_syncing === false) {
+                    res.json(response);
+                } else {
+                    res.json(ResponseJSON(ErrorCodes.SYNCING_DATA, "Syncing data"));
+                }
             } else {
-                res.json(ResponseJSON(ErrorCodes.SYNCING_DATA, "Syncing data"));
+                const data = {
+                    ...req.body,
+                    is_syncing: true,
+                    is_import: false,
+                    topic: "export-db"
+                };
+                await userActions.create(data);
+                // subscribe to mqtt
+                mqttService.subscribe("export-db");
+                // create job wi-sync
+                await wiSyncService.createExportDb(data);
+                res.json(ResponseJSON(ErrorCodes.SYNCING_DATA, "Starting Sync data"));
             }
         } else {
-            const data = {
-                ...req.body,
-                is_syncing: true,
-                topic: "export-db"
-            };
-            await userActions.create(data);
-            // subscribe to mqtt
-            mqttService.subscribe("export-db");
-            // create job wi-sync
-            await wiSyncService.createExportDb(data);
-            res.json(ResponseJSON(ErrorCodes.SYNCING_DATA, "Starting Sync data"));
+            return res.json(response);
         }
-    } catch (e) {
+    } catch (err) {
         res.json(ResponseJSON(ErrorCodes.INTERNAL_SERVER_ERROR, err.message));
     }
 });

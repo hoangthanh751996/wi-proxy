@@ -12,7 +12,7 @@ const loginForward = async (route, payload) => {
         if (res && res.code === 200) {
             const content = res.content;
             url = `${LOCAL_WI_AUTH_HOST}/company/new`;
-            res = await apiSender.postThirdServer(url, {Authorization: content.token}, {}, content.company);
+            await apiSender.postThirdServer(url, {Authorization: content.token}, {}, content.company);
             url = `${CLOUD_WI_AUTH_HOST}/user/list-by-company`;
             res = await apiSender.postThirdServer(url, {Authorization: content.token}, {}, {...payload});
             const usersCloud = res.content || [];
@@ -32,13 +32,6 @@ const wiAuthForward = async (route, method, headers, query,payload) => {
     let url = `${LOCAL_WI_AUTH_HOST}${route}`;
     if (method === "POST") {
         let res = await apiSender.postThirdServer (url, headers, query, payload);
-        // if (res && res.code !== 200) {
-        //     url = `${CLOUD_WI_AUTH_HOST}${route}`;
-        //     res = await apiSender.postThirdServer (url, token, payload);
-        //     if (res && res.code === 200) {
-
-        //     }
-        // }
         console.log("res", res);
         return res;
     }
@@ -47,4 +40,4 @@ const wiAuthForward = async (route, method, headers, query,payload) => {
 module.exports = {
     loginForward,
     wiAuthForward
-}
+};

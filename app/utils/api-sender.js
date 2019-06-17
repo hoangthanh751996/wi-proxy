@@ -8,7 +8,7 @@ function getThirdServer (url, headers, query) {
         },
         headers: {
             // ...headers,
-            Authorization: headers["authorization"]
+            Authorization: headers["Authorization"] || headers["authorization"]
         },
         method: "GET",
         json: true
@@ -23,7 +23,7 @@ function postThirdServer (url, headers, query, payload) {
             ...query
         },
         headers: {
-            Authorization: headers["authorization"]
+            Authorization: headers["Authorization"] || headers["authorization"]
             // host: "localhost:3000"
         },
         method: "POST",

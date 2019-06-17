@@ -20,9 +20,10 @@
         "uri": "mongodb://127.0.0.1:27017/wi-proxy"
     },
     "private_hosts": {
-        "wi_sync": "http://localhost:3031"
+        "wi_sync": "http://118.70.171.246:30331"
     },
     "path_download": "./download",
+    "curveBasePath": "/var/lib/docker-local/wi-backend/curve",
     "CONCURRENT_TASKS_EXECUTE": 2,
     "RETRY_TIME": 2,
     "mysql": {

@@ -11,6 +11,9 @@ const UserSchema = new Schema({
     },
     is_syncing: {
         type: Boolean
+    },
+    is_import: {
+        type: Boolean
     }
 });
 
